@@ -1,0 +1,34 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<!--Notice to Bygdrift developer: Create nuget package: dotnet pack-->
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<Version>0.9.0</Version>
+		<Authors>kenboc</Authors>
+		<Company>Bygdrift</Company>
+		<Description>An extension of Microsoft.Extensions.Logging.ILogger that makes it possible to remember inputs in a list</Description>
+		<Copyright>https://github.com/Bygdrift/Tools.Log/blob/master/License.md</Copyright>
+		<PackageProjectUrl>https://github.com/Bygdrift/Tools.Log</PackageProjectUrl>
+		<PackageIcon>icon.png</PackageIcon>
+		<RepositoryUrl>git@github.com:Bygdrift/Tools.Log.git</RepositoryUrl>
+		<PackageTags>Log</PackageTags>
+		<RepositoryType>git</RepositoryType>
+		<NeutralLanguage>en</NeutralLanguage>
+		<PackageId>Bygdrift.Tools.Log</PackageId>
+		<Product>Bygdrift.Tools.Log</Product>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+		<PackageReleaseNotes>
+			Extracted the project to it's own from Warehouse, as I earlier have done with Bygdrift.CsvTools.
+		</PackageReleaseNotes>
+		<GenerateDocumentationFile>True</GenerateDocumentationFile>
+	</PropertyGroup>
+	
+	<ItemGroup>
+		<None Include="icon.png" Pack="true" PackagePath="\" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.Extensions.Logging" Version="6.0.0" />
+	</ItemGroup>
+	
+</Project>
