@@ -1,4 +1,4 @@
-# Bygdrift.Tools.Log
+# Bygdrift.Tools.LogTool
 
 Microsoft.Extensions.Logging.ILogger cannot hold inputs so it's possible to later ask what inputs have been send to ILogger. So that is the reason for this tiny library. 
 
