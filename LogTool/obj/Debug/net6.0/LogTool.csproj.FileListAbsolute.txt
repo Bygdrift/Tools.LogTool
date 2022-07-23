@@ -1,0 +1,14 @@
+C:\Users\kenbo\OneDrive\Udvikling\Bygdrift\Warehouse\Submodules\Bygdrift.Tools.LogTool\LogTool\bin\Debug\net6.0\LogTool.deps.json
+C:\Users\kenbo\OneDrive\Udvikling\Bygdrift\Warehouse\Submodules\Bygdrift.Tools.LogTool\LogTool\bin\Debug\net6.0\LogTool.dll
+C:\Users\kenbo\OneDrive\Udvikling\Bygdrift\Warehouse\Submodules\Bygdrift.Tools.LogTool\LogTool\bin\Debug\net6.0\ref\LogTool.dll
+C:\Users\kenbo\OneDrive\Udvikling\Bygdrift\Warehouse\Submodules\Bygdrift.Tools.LogTool\LogTool\bin\Debug\net6.0\LogTool.pdb
+C:\Users\kenbo\OneDrive\Udvikling\Bygdrift\Warehouse\Submodules\Bygdrift.Tools.LogTool\LogTool\bin\Debug\net6.0\LogTool.xml
+C:\Users\kenbo\OneDrive\Udvikling\Bygdrift\Warehouse\Submodules\Bygdrift.Tools.LogTool\LogTool\obj\Debug\net6.0\LogTool.csproj.AssemblyReference.cache
+C:\Users\kenbo\OneDrive\Udvikling\Bygdrift\Warehouse\Submodules\Bygdrift.Tools.LogTool\LogTool\obj\Debug\net6.0\LogTool.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\kenbo\OneDrive\Udvikling\Bygdrift\Warehouse\Submodules\Bygdrift.Tools.LogTool\LogTool\obj\Debug\net6.0\LogTool.AssemblyInfoInputs.cache
+C:\Users\kenbo\OneDrive\Udvikling\Bygdrift\Warehouse\Submodules\Bygdrift.Tools.LogTool\LogTool\obj\Debug\net6.0\LogTool.AssemblyInfo.cs
+C:\Users\kenbo\OneDrive\Udvikling\Bygdrift\Warehouse\Submodules\Bygdrift.Tools.LogTool\LogTool\obj\Debug\net6.0\LogTool.csproj.CoreCompileInputs.cache
+C:\Users\kenbo\OneDrive\Udvikling\Bygdrift\Warehouse\Submodules\Bygdrift.Tools.LogTool\LogTool\obj\Debug\net6.0\LogTool.dll
+C:\Users\kenbo\OneDrive\Udvikling\Bygdrift\Warehouse\Submodules\Bygdrift.Tools.LogTool\LogTool\obj\Debug\net6.0\ref\LogTool.dll
+C:\Users\kenbo\OneDrive\Udvikling\Bygdrift\Warehouse\Submodules\Bygdrift.Tools.LogTool\LogTool\obj\Debug\net6.0\LogTool.xml
+C:\Users\kenbo\OneDrive\Udvikling\Bygdrift\Warehouse\Submodules\Bygdrift.Tools.LogTool\LogTool\obj\Debug\net6.0\LogTool.pdb

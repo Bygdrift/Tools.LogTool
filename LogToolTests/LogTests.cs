@@ -3,6 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using System.Linq;
 using Bygdrift.Tools.LogTool;
+using System.Diagnostics;
 
 namespace LogToolTests
 {
@@ -37,10 +38,32 @@ namespace LogToolTests
             var errors = log.GetErrorsAndCriticals();
             Assert.AreEqual(errors.Count(), 4);
 
-            Assert.AreEqual(log.GetLogs(false).ElementAt(0), "-a- 1-");
-            Assert.AreEqual(log.GetLogs(false).ElementAt(1), "-a- {B}-");
-            Assert.AreEqual(log.GetLogs(false).ElementAt(2), "-{A}- {B}-");
-            Assert.AreEqual(log.GetLogs(true).ElementAt(3) ,"test");
+            Assert.AreEqual(log.GetLogs().ElementAt(0), "-a- 1-");
+            Assert.AreEqual(log.GetLogs().ElementAt(1), "-a- {B}-");
+            Assert.AreEqual(log.GetLogs().ElementAt(2), "-{A}- {B}-");
+            Assert.AreEqual(log.GetLogs().ElementAt(3) ,"test");
+        }
+
+        [TestMethod]
+        public void AddUniqueMessages()
+        {
+            var log = new Log();
+            log.LogInformation("test");
+            AddError(log, "test2");  //Adds an error from another method
+
+            var method = new StackTrace().GetFrame(0).GetMethod();
+            var namespaceName = method.ReflectedType.Namespace;
+            var namespaceClassName = method.ReflectedType.FullName;
+            var namespaceClassMethodName = method.ReflectedType.FullName + "." + method.Name;
+            Assert.AreEqual(log.GetLogs(namespaceName).Count(), 2);
+            Assert.AreEqual(log.GetLogs(namespaceClassName).Count(), 2);
+            Assert.AreEqual(log.GetLogs(namespaceClassMethodName).Count(), 1);
+            Assert.IsFalse(log.HasErrorsOrCriticals(namespaceClassMethodName));
+        }
+
+        private void AddError(Log log, string message)
+        {
+            log.LogError(message);
         }
     }
 }
