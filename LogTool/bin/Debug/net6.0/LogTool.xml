@@ -164,20 +164,18 @@
             <param name="message"></param>
             <param name="args"></param>
         </member>
-        <member name="F:Bygdrift.Tools.LogTool.Models.Caller.NamespaceName">
+        <member name="M:Bygdrift.Tools.LogTool.Models.Caller.#ctor(System.Diagnostics.StackFrame)">
+            <summary></summary>
+            <param name="stack"></param>
+        </member>
+        <member name="P:Bygdrift.Tools.LogTool.Models.Caller.NamespaceName">
             <summary>The name of the namespace that called this method</summary>
         </member>
-        <member name="F:Bygdrift.Tools.LogTool.Models.Caller.ClassName">
+        <member name="P:Bygdrift.Tools.LogTool.Models.Caller.ClassName">
             <summary>The name of the class that called this method</summary>
         </member>
-        <member name="F:Bygdrift.Tools.LogTool.Models.Caller.MethodName">
+        <member name="P:Bygdrift.Tools.LogTool.Models.Caller.MethodName">
             <summary>The name of the method that called this method</summary>
-        </member>
-        <member name="M:Bygdrift.Tools.LogTool.Models.Caller.#ctor(System.Diagnostics.StackFrame)">
-            <summary>
-            
-            </summary>
-            <param name="stack"></param>
         </member>
         <member name="P:Bygdrift.Tools.LogTool.Models.Caller.NamespaceClassName">
             <summary>Namespace.Class</summary>

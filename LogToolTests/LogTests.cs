@@ -50,6 +50,10 @@ namespace LogToolTests
             var log = new Log();
             log.LogInformation("test");
             AddError(log, "test2");  //Adds an error from another method
+
+            var aa = log.Logs.Last().Caller;
+            
+
             Assert.AreEqual(log.GetLogs(CallerPath.NamespaceName).Count(), 2);
             Assert.AreEqual(log.GetLogs(CallerPath.NamespaceClassName).Count(), 2);
             Assert.AreEqual(log.GetLogs(CallerPath.NamespaceClassMethodName).Count(), 1);

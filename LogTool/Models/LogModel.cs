@@ -34,7 +34,7 @@ namespace Bygdrift.Tools.LogTool.Models
         /// <summary>
         /// Handles where calls comes from like Namspace.Class.Method
         /// </summary>
-        private Caller Caller { get; set; }
+        public Caller Caller { get; set; }
 
         /// <summary>
         /// Eventual arugments that followed the log

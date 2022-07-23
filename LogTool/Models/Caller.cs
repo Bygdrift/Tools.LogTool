@@ -1,38 +1,37 @@
 ﻿using System.Diagnostics;
+using System.Reflection;
 
 namespace Bygdrift.Tools.LogTool.Models
 {
     public class Caller
     {
-        /// <summary>The name of the namespace that called this method</summary>
-        public readonly string NamespaceName;
-
-        /// <summary>The name of the class that called this method</summary>
-        public readonly string ClassName;
-
-        /// <summary>The name of the method that called this method</summary>
-        public readonly string MethodName;
-
         private string _fullCallerPath;
+        private string _namepaceName;
+        private string _methodName;
+        private string _className;
+        private MethodBase methodBase;
 
-        /// <summary>
-        /// 
-        /// </summary>
+        /// <summary></summary>
         /// <param name="stack"></param>
         public Caller(StackFrame stack)
         {
-            var method = stack.GetMethod();
-            NamespaceName = method.ReflectedType.Namespace;
-            ClassName = method.ReflectedType.Name;
-            MethodName = method.Name;
+            methodBase = stack.GetMethod();
         }
+
+        /// <summary>The name of the namespace that called this method</summary>
+        public string NamespaceName { get { return _namepaceName ??= methodBase.ReflectedType.Namespace; } }
+
+        /// <summary>The name of the class that called this method</summary>
+        public string ClassName { get { return _className ??= methodBase.ReflectedType.Name; } }
+
+        /// <summary>The name of the method that called this method</summary>
+        public string MethodName { get { return _methodName ??= methodBase.Name; } }
 
         /// <summary>Namespace.Class</summary>
         public string NamespaceClassName { get { return NamespaceName + "." + ClassName; } }
 
         /// <summary>Namespace.Class.Method</summary>
         public string NamespaceClassMethodName { get { return NamespaceName + "." + ClassName + "." + MethodName; } }
-
 
         /// <summary>
         /// The message in the log
