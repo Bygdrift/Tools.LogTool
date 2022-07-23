@@ -28,6 +28,15 @@ namespace Bygdrift.Tools.LogTool
         }
 
         /// <summary>Add logs</summary>
+        public Log Add(Log log)
+        {
+            foreach (var item in log.Logs)
+                Add(item);
+
+            return this;
+        }
+
+        /// <summary>Add logs</summary>
         public Log Add(LogType logType, StackFrame stack, Exception exception, string message, params object[] args)
         {
             return Add(new LogModel(logType, stack, message, exception, args));

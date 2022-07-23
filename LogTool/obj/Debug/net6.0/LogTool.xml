@@ -82,6 +82,9 @@
         <member name="M:Bygdrift.Tools.LogTool.Log.Add(Bygdrift.Tools.LogTool.Models.LogModel)">
             <summary>Add logs</summary>
         </member>
+        <member name="M:Bygdrift.Tools.LogTool.Log.Add(Bygdrift.Tools.LogTool.Log)">
+            <summary>Add logs</summary>
+        </member>
         <member name="M:Bygdrift.Tools.LogTool.Log.Add(Bygdrift.Tools.LogTool.Models.LogType,System.Diagnostics.StackFrame,System.Exception,System.String,System.Object[])">
             <summary>Add logs</summary>
         </member>
