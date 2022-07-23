@@ -45,14 +45,19 @@ namespace LogToolTests
         }
 
         [TestMethod]
+        public void AddMultipleMessages()
+        {
+            var log = new Log().Add(LogType.Error, "a").Add(LogType.Error, new string[] { "b", "c", "d" });
+            Assert.AreEqual(log.GetLogs().Count(), 4);
+            Assert.IsTrue(log.HasErrorsOrCriticals());
+        }
+
+        [TestMethod]
         public void AddUniqueMessages()
         {
             var log = new Log();
             log.LogInformation("test");
             AddError(log, "test2");  //Adds an error from another method
-
-            var aa = log.Logs.Last().Caller;
-            
 
             Assert.AreEqual(log.GetLogs(CallerPath.NamespaceName).Count(), 2);
             Assert.AreEqual(log.GetLogs(CallerPath.NamespaceClassName).Count(), 2);

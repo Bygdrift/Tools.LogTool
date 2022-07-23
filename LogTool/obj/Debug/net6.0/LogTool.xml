@@ -79,30 +79,20 @@
             </summary>
             <param name="fromCurrentCallerPath">Only returns logs that comes from the calling path. Ignored if None</param>
         </member>
+        <member name="M:Bygdrift.Tools.LogTool.Log.Add(Bygdrift.Tools.LogTool.Models.LogModel)">
+            <summary>Add logs</summary>
+        </member>
         <member name="M:Bygdrift.Tools.LogTool.Log.Add(Bygdrift.Tools.LogTool.Models.LogType,System.Diagnostics.StackFrame,System.Exception,System.String,System.Object[])">
-            <summary>
-            Create a log
-            </summary>
-            <param name="logType"></param>
-            <param name="stack"></param>
-            <param name="exception"></param>
-            <param name="message"></param>
-            <param name="args"></param>
+            <summary>Add logs</summary>
         </member>
         <member name="M:Bygdrift.Tools.LogTool.Log.Add(Bygdrift.Tools.LogTool.Models.LogType,System.String)">
-            <summary>
-            Create a log
-            </summary>
-            <param name="logType"></param>
-            <param name="message"></param>
+            <summary>Add logs</summary>
+        </member>
+        <member name="M:Bygdrift.Tools.LogTool.Log.Add(Bygdrift.Tools.LogTool.Models.LogType,System.String[])">
+            <summary>Add logs</summary>
         </member>
         <member name="M:Bygdrift.Tools.LogTool.Log.Add(Bygdrift.Tools.LogTool.Models.LogType,System.String,System.Object[])">
-            <summary>
-            Create a log
-            </summary>
-            <param name="logType"></param>
-            <param name="message"></param>
-            <param name="args"></param>
+            <summary>Add logs</summary>
         </member>
         <member name="M:Bygdrift.Tools.LogTool.Log.LogInformation(System.String,System.Object[])">
             <summary>
