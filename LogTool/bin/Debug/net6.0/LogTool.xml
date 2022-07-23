@@ -34,14 +34,21 @@
             <summary>
             Return all errors and critical logs
             </summary>
-            <param name="callerPath">Only returns logs that conatains a path from the callerpath. Ignored if null or empty</param>
+            <param name="callerPath">Only returns logs that conatains a path from the callerpath. Ignored if None</param>
             <param name="includeCallerPath"></param>
         </member>
         <member name="M:Bygdrift.Tools.LogTool.Log.GetLogs(System.String,Bygdrift.Tools.LogTool.Models.CallerPath)">
             <summary>
             Get all logs
             </summary>
-            <param name="callerPath">Only returns logs that conatains a path from the callerpath. Ignored if null or empty</param>
+            <param name="callerPath">Only returns logs that conatains a path from the callerpath. Ignored if None</param>
+            <param name="includeCallerPath">writes in from what class the log has been send</param>
+        </member>
+        <member name="M:Bygdrift.Tools.LogTool.Log.GetLogs(Bygdrift.Tools.LogTool.Models.CallerPath,Bygdrift.Tools.LogTool.Models.CallerPath)">
+            <summary>
+            Get all logs
+            </summary>
+            <param name="fromCurrentCallerPath">Only returns logs that comes from the calling path. Ignored if None</param>
             <param name="includeCallerPath">writes in from what class the log has been send</param>
         </member>
         <member name="M:Bygdrift.Tools.LogTool.Log.GetLogs(Bygdrift.Tools.LogTool.Models.LogType,System.String,Bygdrift.Tools.LogTool.Models.CallerPath)">
@@ -49,7 +56,15 @@
             Get all logs
             </summary>
             <param name="logType">What kind of log to return</param>
-            <param name="callerPath">Only returns logs that conatains a path from the callerpath. Ignored if null or empty</param>
+            <param name="callerPath">Only returns logs that conatains a path from the callerpath. Ignored if None</param>
+            <param name="includeCallerPath">writes in from what class the log has been send</param>
+        </member>
+        <member name="M:Bygdrift.Tools.LogTool.Log.GetLogs(Bygdrift.Tools.LogTool.Models.LogType,Bygdrift.Tools.LogTool.Models.CallerPath,Bygdrift.Tools.LogTool.Models.CallerPath)">
+            <summary>
+            Get all logs
+            </summary>
+            <param name="logType">What kind of log to return</param>
+            <param name="fromCurrentCallerPath">Only returns logs that comes from the calling path. Ignored if None</param>
             <param name="includeCallerPath">writes in from what class the log has been send</param>
         </member>
         <member name="M:Bygdrift.Tools.LogTool.Log.HasErrorsOrCriticals(System.String)">
@@ -58,7 +73,13 @@
             </summary>
             <param name="callerPath">Only returns logs that conatains a path from the callerpath. Ignored if null or empty</param>
         </member>
-        <member name="M:Bygdrift.Tools.LogTool.Log.Add(Bygdrift.Tools.LogTool.Models.LogType,System.Diagnostics.StackTrace,System.Exception,System.String,System.Object[])">
+        <member name="M:Bygdrift.Tools.LogTool.Log.HasErrorsOrCriticals(Bygdrift.Tools.LogTool.Models.CallerPath)">
+            <summary>
+            If there are any errors in the log
+            </summary>
+            <param name="fromCurrentCallerPath">Only returns logs that comes from the calling path. Ignored if None</param>
+        </member>
+        <member name="M:Bygdrift.Tools.LogTool.Log.Add(Bygdrift.Tools.LogTool.Models.LogType,System.Diagnostics.StackFrame,System.Exception,System.String,System.Object[])">
             <summary>
             Create a log
             </summary>
@@ -143,6 +164,35 @@
             <param name="message"></param>
             <param name="args"></param>
         </member>
+        <member name="F:Bygdrift.Tools.LogTool.Models.Caller.NamespaceName">
+            <summary>The name of the namespace that called this method</summary>
+        </member>
+        <member name="F:Bygdrift.Tools.LogTool.Models.Caller.ClassName">
+            <summary>The name of the class that called this method</summary>
+        </member>
+        <member name="F:Bygdrift.Tools.LogTool.Models.Caller.MethodName">
+            <summary>The name of the method that called this method</summary>
+        </member>
+        <member name="M:Bygdrift.Tools.LogTool.Models.Caller.#ctor(System.Diagnostics.StackFrame)">
+            <summary>
+            
+            </summary>
+            <param name="stack"></param>
+        </member>
+        <member name="P:Bygdrift.Tools.LogTool.Models.Caller.NamespaceClassName">
+            <summary>Namespace.Class</summary>
+        </member>
+        <member name="P:Bygdrift.Tools.LogTool.Models.Caller.NamespaceClassMethodName">
+            <summary>Namespace.Class.Method</summary>
+        </member>
+        <member name="M:Bygdrift.Tools.LogTool.Models.Caller.GetCallerPath(Bygdrift.Tools.LogTool.Models.CallerPath)">
+            <summary>
+            The message in the log
+            </summary>
+        </member>
+        <member name="P:Bygdrift.Tools.LogTool.Models.Caller.FullCallerPath">
+            <summary>Get the full path to the calling method like: Namespace.Class.Method</summary>
+        </member>
         <member name="T:Bygdrift.Tools.LogTool.Models.CallerPath">
             <summary>
             
@@ -151,41 +201,33 @@
         <member name="F:Bygdrift.Tools.LogTool.Models.CallerPath.None">
             The message doe not contain the path to the method that called the lod
         </member>
-        <member name="F:Bygdrift.Tools.LogTool.Models.CallerPath.Namespace">
+        <member name="F:Bygdrift.Tools.LogTool.Models.CallerPath.NamespaceName">
             The message in the log, starting with the Namespace that send the log
         </member>
-        <member name="F:Bygdrift.Tools.LogTool.Models.CallerPath.NamespaceClass">
+        <member name="F:Bygdrift.Tools.LogTool.Models.CallerPath.NamespaceClassName">
             The message in the log, starting with Namespace.Classname that send the log
         </member>
-        <member name="F:Bygdrift.Tools.LogTool.Models.CallerPath.NamespaceClassMethod">
+        <member name="F:Bygdrift.Tools.LogTool.Models.CallerPath.NamespaceClassMethodName">
             The message in the log, starting with Namepsace.Classname.MethodName that send the log
         </member>
         <member name="T:Bygdrift.Tools.LogTool.Models.LogModel">
             <summary>
-            The log model
+            Handles where calls comes from like Namspace.Class.Method
             </summary>
         </member>
-        <member name="F:Bygdrift.Tools.LogTool.Models.LogModel.NamespaceCaller">
-            <summary>The name of the namespace that called this method</summary>
-        </member>
-        <member name="F:Bygdrift.Tools.LogTool.Models.LogModel.ClassCaller">
-            <summary>The name of the class that called this method</summary>
-        </member>
-        <member name="F:Bygdrift.Tools.LogTool.Models.LogModel.MethodCaller">
-            <summary>The name of the method that called this method</summary>
-        </member>
-        <member name="P:Bygdrift.Tools.LogTool.Models.LogModel.FullCallerPath">
-            <summary>Get the full path to the calling method like: Namespace.Class.Method</summary>
-        </member>
-        <member name="M:Bygdrift.Tools.LogTool.Models.LogModel.ContainsCallerPath(System.String)">
+        <member name="M:Bygdrift.Tools.LogTool.Models.LogModel.#ctor(Bygdrift.Tools.LogTool.Models.LogType,System.Diagnostics.StackFrame,System.String,System.Exception,System.Object[])">
             <summary>
-            
+            The model - primary used internal
             </summary>
-            <param name="callerPath">If null or empty, then true.</param>
+            <param name="logType"></param>
+            <param name="stack"></param>
+            <param name="messageTemplate"></param>
+            <param name="exception"></param>
+            <param name="args"></param>
         </member>
-        <member name="M:Bygdrift.Tools.LogTool.Models.LogModel.Message(Bygdrift.Tools.LogTool.Models.CallerPath)">
+        <member name="P:Bygdrift.Tools.LogTool.Models.LogModel.Caller">
             <summary>
-            The message in the log
+            Handles where calls comes from like Namspace.Class.Method
             </summary>
         </member>
         <member name="P:Bygdrift.Tools.LogTool.Models.LogModel.Arguments">
@@ -208,15 +250,16 @@
             The type of log - is it an information or error etc.
             </summary>
         </member>
-        <member name="M:Bygdrift.Tools.LogTool.Models.LogModel.#ctor(Bygdrift.Tools.LogTool.Models.LogType,System.Diagnostics.StackTrace,System.String,System.Exception,System.Object[])">
+        <member name="M:Bygdrift.Tools.LogTool.Models.LogModel.ContainsCallerPath(System.String)">
             <summary>
-            The model - primary used internal
+            
             </summary>
-            <param name="logType"></param>
-            <param name="stack"></param>
-            <param name="messageTemplate"></param>
-            <param name="exception"></param>
-            <param name="args"></param>
+            <param name="callerPath">If null or empty, then true.</param>
+        </member>
+        <member name="M:Bygdrift.Tools.LogTool.Models.LogModel.Message(Bygdrift.Tools.LogTool.Models.CallerPath)">
+            <summary>
+            The message in the log
+            </summary>
         </member>
         <member name="T:Bygdrift.Tools.LogTool.Models.LogType">
             <summary>

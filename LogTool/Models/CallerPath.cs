@@ -8,10 +8,10 @@
         /// The message doe not contain the path to the method that called the lod
         None,
         /// The message in the log, starting with the Namespace that send the log
-        Namespace,
+        NamespaceName,
         /// The message in the log, starting with Namespace.Classname that send the log
-        NamespaceClass,
+        NamespaceClassName,
         /// The message in the log, starting with Namepsace.Classname.MethodName that send the log
-        NamespaceClassMethod
+        NamespaceClassMethodName
     }
 }

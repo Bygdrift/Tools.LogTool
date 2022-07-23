@@ -19,7 +19,7 @@ namespace Bygdrift.Tools.LogTool
         /// <param name="message"></param>
         /// <param name="args"></param>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "CA2254:Template should be a static expression", Justification = "<Pending>")]
-        private LogModel Add(LogType logType, StackTrace stack, Exception exception, string message, params object[] args)
+        private LogModel Add(LogType logType, StackFrame stack, Exception exception, string message, params object[] args)
         {
             var log = new LogModel(logType, stack, message, exception, args);
             _logs.Add(log);
@@ -43,7 +43,7 @@ namespace Bygdrift.Tools.LogTool
         /// <param name="message"></param>
         public LogModel Add(LogType logType, string message)
         {
-            return Add(logType, new StackTrace(), null, message, null, null);
+            return Add(logType, new StackTrace().GetFrame(1), null, message, null, null);
         }
 
         /// <summary>
@@ -54,7 +54,7 @@ namespace Bygdrift.Tools.LogTool
         /// <param name="args"></param>
         public LogModel Add(LogType logType, string message, params object[] args)
         {
-            return Add(logType, new StackTrace(), null, message, null, args);
+            return Add(logType, new StackTrace().GetFrame(1), null, message, null, args);
         }
 
         /// <summary>
@@ -64,7 +64,7 @@ namespace Bygdrift.Tools.LogTool
         /// <param name="args"></param>
         public void LogInformation(string message, params object[] args)
         {
-            Add(LogType.Information, new StackTrace(), null, message, args);
+            Add(LogType.Information, new StackTrace().GetFrame(1), null, message, args);
         }
 
         /// <summary>
@@ -75,7 +75,7 @@ namespace Bygdrift.Tools.LogTool
         /// <param name="args"></param>
         public void LogInformation(Exception exception, string message, params object[] args)
         {
-            Add(LogType.Information, new StackTrace(), exception, message, args);
+            Add(LogType.Information, new StackTrace().GetFrame(1), exception, message, args);
         }
 
         /// <summary>
@@ -85,7 +85,7 @@ namespace Bygdrift.Tools.LogTool
         /// <param name="args"></param>
         public void LogWarning(string message, params object[] args)
         {
-            Add(LogType.Warning, new StackTrace(), null, message, args);
+            Add(LogType.Warning, new StackTrace().GetFrame(1), null, message, args);
         }
 
         /// <summary>
@@ -96,7 +96,7 @@ namespace Bygdrift.Tools.LogTool
         /// <param name="args"></param>
         public void LogWarning(Exception exception, string message, params object[] args)
         {
-            Add(LogType.Warning, new StackTrace(), exception, message, args);
+            Add(LogType.Warning, new StackTrace().GetFrame(1), exception, message, args);
         }
 
         /// <summary>
@@ -106,7 +106,7 @@ namespace Bygdrift.Tools.LogTool
         /// <param name="args"></param>
         public void LogError(string message, params object[] args)
         {
-            Add(LogType.Error, new StackTrace(), null, message, args);
+            Add(LogType.Error, new StackTrace().GetFrame(1), null, message, args);
         }
 
         /// <summary>
@@ -117,7 +117,7 @@ namespace Bygdrift.Tools.LogTool
         /// <param name="args"></param>
         public void LogError(Exception exception, string message, params object[] args)
         {
-            Add(LogType.Error, new StackTrace(), exception, message, args);
+            Add(LogType.Error, new StackTrace().GetFrame(1), exception, message, args);
         }
 
         /// <summary>
@@ -127,7 +127,7 @@ namespace Bygdrift.Tools.LogTool
         /// <param name="args"></param>
         public void LogCritical(string message, params object[] args)
         {
-            var log = Add(LogType.Critical, new StackTrace(), null, message, args);
+            var log = Add(LogType.Critical, new StackTrace().GetFrame(1), null, message, args);
             throw new Exception($"App log has thrown a critical error and stops. The error: {log.Message}");
         }
 
@@ -139,7 +139,7 @@ namespace Bygdrift.Tools.LogTool
         /// <param name="args"></param>
         public void LogCritical(Exception exception, string message, params object[] args)
         {
-            var log = Add(LogType.Critical, new StackTrace(), exception, message, args);
+            var log = Add(LogType.Critical, new StackTrace().GetFrame(1), exception, message, args);
             throw new Exception($"App log has thrown a critical error and stops. The error: {log.Message}");
         }
     }

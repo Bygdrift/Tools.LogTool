@@ -3,7 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using System.Linq;
 using Bygdrift.Tools.LogTool;
-using System.Diagnostics;
+using Bygdrift.Tools.LogTool.Models;
 
 namespace LogToolTests
 {
@@ -50,15 +50,10 @@ namespace LogToolTests
             var log = new Log();
             log.LogInformation("test");
             AddError(log, "test2");  //Adds an error from another method
-
-            var method = new StackTrace().GetFrame(0).GetMethod();
-            var namespaceName = method.ReflectedType.Namespace;
-            var namespaceClassName = method.ReflectedType.FullName;
-            var namespaceClassMethodName = method.ReflectedType.FullName + "." + method.Name;
-            Assert.AreEqual(log.GetLogs(namespaceName).Count(), 2);
-            Assert.AreEqual(log.GetLogs(namespaceClassName).Count(), 2);
-            Assert.AreEqual(log.GetLogs(namespaceClassMethodName).Count(), 1);
-            Assert.IsFalse(log.HasErrorsOrCriticals(namespaceClassMethodName));
+            Assert.AreEqual(log.GetLogs(CallerPath.NamespaceName).Count(), 2);
+            Assert.AreEqual(log.GetLogs(CallerPath.NamespaceClassName).Count(), 2);
+            Assert.AreEqual(log.GetLogs(CallerPath.NamespaceClassMethodName).Count(), 1);
+            Assert.IsFalse(log.HasErrorsOrCriticals(CallerPath.NamespaceClassMethodName));
         }
 
         private void AddError(Log log, string message)

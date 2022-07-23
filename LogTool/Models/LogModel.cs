@@ -8,67 +8,33 @@ using System.Text.RegularExpressions;
 namespace Bygdrift.Tools.LogTool.Models
 {
     /// <summary>
-    /// The log model
+    /// Handles where calls comes from like Namspace.Class.Method
     /// </summary>
     public class LogModel
     {
-        /// <summary>The name of the namespace that called this method</summary>
-        public readonly string NamespaceCaller;
-
-        /// <summary>The name of the class that called this method</summary>
-        public readonly string ClassCaller;
-
-        /// <summary>The name of the method that called this method</summary>
-        public readonly string MethodCaller;
-
-        private string _fullCallerPath;
-
-        /// <summary>Get the full path to the calling method like: Namespace.Class.Method</summary>
-        public string FullCallerPath
+        /// <summary>
+        /// The model - primary used internal
+        /// </summary>
+        /// <param name="logType"></param>
+        /// <param name="stack"></param>
+        /// <param name="messageTemplate"></param>
+        /// <param name="exception"></param>
+        /// <param name="args"></param>
+        public LogModel(LogType logType, StackFrame stack, string messageTemplate, Exception exception, params object[] args)
         {
-            get
-            {
-                if( _fullCallerPath == null && !string.IsNullOrEmpty(NamespaceCaller))
-                {
-                    _fullCallerPath = NamespaceCaller;
-                    if (!string.IsNullOrEmpty(ClassCaller))
-                    {
-                        _fullCallerPath += "." + ClassCaller;
-                        if(!string.IsNullOrEmpty(MethodCaller))
-                            _fullCallerPath += "." + MethodCaller;
-                    }
-                }
-                return _fullCallerPath;
-            }
+            LogType = logType;
+            MessageTemplate = messageTemplate;
+            Exception = exception;
+            Caller = new Caller(stack);
+
+            if (args != null && args.Any())
+                Arguments = args.ToList();
         }
 
         /// <summary>
-        /// 
+        /// Handles where calls comes from like Namspace.Class.Method
         /// </summary>
-        /// <param name="callerPath">If null or empty, then true.</param>
-        public bool ContainsCallerPath(string callerPath)
-        {
-            if (string.IsNullOrEmpty(callerPath))
-                return true;
-
-            return FullCallerPath.ToUpper().StartsWith(callerPath.ToUpper());
-        }
-
-        /// <summary>
-        /// The message in the log
-        /// </summary>
-        public string Message(CallerPath callerPath = CallerPath.None)
-        {
-            var res = ReplaceBracketContentWithArgs(MessageTemplate, Arguments);
-            if (callerPath == CallerPath.Namespace)
-                return NamespaceCaller + ": " + res;
-            if (callerPath == CallerPath.NamespaceClass)
-                return NamespaceCaller + "." + ClassCaller + ": " + res;
-            if (callerPath == CallerPath.NamespaceClassMethod)
-                return NamespaceCaller + "." + ClassCaller + "." + MethodCaller + ": " + res;
-
-            return res;
-        }
+        private Caller Caller { get; set; }
 
         /// <summary>
         /// Eventual arugments that followed the log
@@ -91,30 +57,29 @@ namespace Bygdrift.Tools.LogTool.Models
         public LogType LogType { get; }
 
         /// <summary>
-        /// The model - primary used internal
+        /// 
         /// </summary>
-        /// <param name="logType"></param>
-        /// <param name="stack"></param>
-        /// <param name="messageTemplate"></param>
-        /// <param name="exception"></param>
-        /// <param name="args"></param>
-        public LogModel(LogType logType, StackTrace stack, string messageTemplate, Exception exception, params object[] args)
+        /// <param name="callerPath">If null or empty, then true.</param>
+        public bool ContainsCallerPath(string callerPath)
         {
-            var method = stack.GetFrame(1).GetMethod();
+            if (string.IsNullOrEmpty(callerPath))
+                return true;
 
-            LogType = logType;
-            MessageTemplate = messageTemplate;
-            Exception = exception;
-            NamespaceCaller = method.ReflectedType.Namespace;
-            ClassCaller = method.ReflectedType.Name;
-            MethodCaller = method.Name;
-            if (args != null && args.Any())
-                Arguments = args.ToList();
+            return Caller.FullCallerPath.ToUpper().StartsWith(callerPath.ToUpper());
+        }
+
+        /// <summary>
+        /// The message in the log
+        /// </summary>
+        public string Message(CallerPath callerPath = CallerPath.None)
+        {
+            var res = ReplaceBracketContentWithArgs(MessageTemplate, Arguments);
+            return callerPath != CallerPath.None ? Caller.GetCallerPath(callerPath) + ": " + res : res;
         }
 
         private string CreateMessage(bool includeNamespace, bool includeClassName, bool includeMethodName)
         {
-            var path = (includeNamespace ? NamespaceCaller : string.Empty) + (includeClassName ? ClassCaller : string.Empty) + (includeMethodName ? "." + MethodCaller : string.Empty);
+            var path = (includeNamespace ? Caller.NamespaceName : string.Empty) + (includeClassName ? Caller.ClassName : string.Empty) + (includeMethodName ? "." + Caller.MethodName : string.Empty);
             var res = ReplaceBracketContentWithArgs(MessageTemplate, Arguments);
             return !string.IsNullOrEmpty(path) ? path + ": " + res : res;
         }
@@ -143,6 +108,5 @@ namespace Bygdrift.Tools.LogTool.Models
 
             return res.ToString();
         }
-
     }
 }
