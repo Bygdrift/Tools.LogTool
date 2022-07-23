@@ -37,7 +37,7 @@ namespace Bygdrift.Tools.LogTool
         }
 
         /// <summary>Add logs</summary>
-        private Log Add(LogType logType, Exception exception, string message, params object[] args)
+        public Log Add(LogType logType, Exception exception, string message, params object[] args)
         {
             return Add(new LogModel(logType, new StackTrace().GetFrame(1), message, exception, args));
         }
