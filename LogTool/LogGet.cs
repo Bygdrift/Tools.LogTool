@@ -82,6 +82,15 @@ namespace Bygdrift.Tools.LogTool
         /// <summary>
         /// If there are any errors in the log
         /// </summary>
+        /// <param name="callerPath">Only returns logs that conatains a path from the callerpath. Ignored if null or empty</param>
+        public bool Any(string callerPath = null)
+        {
+            return Logs.Any(o => o.ContainsCallerPath(callerPath));
+        }
+
+        /// <summary>
+        /// If there are any errors in the log
+        /// </summary>
         /// <param name="fromCurrentCallerPath">Only returns logs that comes from the calling path. Ignored if None</param>
         public bool HasErrorsOrCriticals(CallerPath fromCurrentCallerPath)
         {

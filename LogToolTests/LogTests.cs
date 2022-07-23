@@ -58,7 +58,7 @@ namespace LogToolTests
             var log1 = new Log().Add(LogType.Error, new string[] { "a", "b", "c" });
             var log2 = new Log().Add(LogType.Error, new string[] { "d", "e", "f" });
             log1.Add(log2);
-            Assert.AreEqual(log1.GetLogs().Count(), 6);
+            Assert.AreEqual(log1.GetLogs(LogType.Error).Count(), 6);
         }
 
         [TestMethod]

@@ -37,9 +37,9 @@ namespace Bygdrift.Tools.LogTool
         }
 
         /// <summary>Add logs</summary>
-        public Log Add(LogType logType, StackFrame stack, Exception exception, string message, params object[] args)
+        private Log Add(LogType logType, Exception exception, string message, params object[] args)
         {
-            return Add(new LogModel(logType, stack, message, exception, args));
+            return Add(new LogModel(logType, new StackTrace().GetFrame(1), message, exception, args));
         }
 
         /// <summary>Add logs</summary>
@@ -74,7 +74,7 @@ namespace Bygdrift.Tools.LogTool
         /// <param name="args"></param>
         public void LogInformation(string message, params object[] args)
         {
-            Add(LogType.Information, new StackTrace().GetFrame(1), null, message, args);
+            Add(new LogModel(LogType.Information, new StackTrace().GetFrame(1), message, null, args));
         }
 
         /// <summary>
@@ -85,7 +85,7 @@ namespace Bygdrift.Tools.LogTool
         /// <param name="args"></param>
         public void LogInformation(Exception exception, string message, params object[] args)
         {
-            Add(LogType.Information, new StackTrace().GetFrame(1), exception, message, args);
+            Add(new LogModel(LogType.Information, new StackTrace().GetFrame(1), message, exception, args));
         }
 
         /// <summary>
@@ -95,7 +95,7 @@ namespace Bygdrift.Tools.LogTool
         /// <param name="args"></param>
         public void LogWarning(string message, params object[] args)
         {
-            Add(LogType.Warning, new StackTrace().GetFrame(1), null, message, args);
+            Add(new LogModel(LogType.Warning, new StackTrace().GetFrame(1), message, null, args));
         }
 
         /// <summary>
@@ -106,7 +106,7 @@ namespace Bygdrift.Tools.LogTool
         /// <param name="args"></param>
         public void LogWarning(Exception exception, string message, params object[] args)
         {
-            Add(LogType.Warning, new StackTrace().GetFrame(1), exception, message, args);
+            Add(new LogModel(LogType.Warning, new StackTrace().GetFrame(1), message, exception, args));
         }
 
         /// <summary>
@@ -116,7 +116,7 @@ namespace Bygdrift.Tools.LogTool
         /// <param name="args"></param>
         public void LogError(string message, params object[] args)
         {
-            Add(LogType.Error, new StackTrace().GetFrame(1), null, message, args);
+            Add(new LogModel(LogType.Error, new StackTrace().GetFrame(1), message, null, args));
         }
 
         /// <summary>
@@ -127,7 +127,7 @@ namespace Bygdrift.Tools.LogTool
         /// <param name="args"></param>
         public void LogError(Exception exception, string message, params object[] args)
         {
-            Add(LogType.Error, new StackTrace().GetFrame(1), exception, message, args);
+            Add(new LogModel(LogType.Error, new StackTrace().GetFrame(1), message, exception, args));
         }
 
         /// <summary>
